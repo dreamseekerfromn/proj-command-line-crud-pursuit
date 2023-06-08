@@ -1,6 +1,7 @@
 const { nanoid } = require("nanoid");
 const d = require("../data/data.json");
 const _ = require("lodash");
+const { duplicateC } = require("./duplChecker");
 
 /**
  * create()
@@ -52,6 +53,14 @@ function create(data = d, ...inputStream){
     }
     
     data.push(newObj);
+
+    if(!duplicateC(data)){
+        const duplicatedId = _.filter(data, a => data.indexOf(a.id) !== data.lastIndexOf(a.id));
+        for(let single of duplicatedId){
+            single.id = nanoid(5);
+        }
+    }
+
     return data;
 }
 
