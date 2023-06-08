@@ -3,6 +3,7 @@ const { writeJSON, readJSON } = require("./src/fs.js");
 const { deleteByName, deleteById } = require("./src/delete.js");
 const { addToCart, deleteFromCart, emptyCart } = require("./src/cart.js");
 const { searchItemById } = require("./src/search.js");
+const { detailView, detailSingle } = require("./src/detail.js");
 
 function run(){
     const argc = process.argv.length;
@@ -68,7 +69,17 @@ function run(){
         case "update":
             break;
         case "detail":
-            console.log(data);
+            switch(argc){
+                case 3:
+                    detailView(data);
+                    break;
+                case 4:
+                    detailSingle(searchItemById(data,process.argv[3]));
+                    break;
+                default:
+                    console.log("wrong command");
+                    return -1;
+            }
             break;
         case "faker":
             let temp = process.argv[3] ? createArr(Number(process.argv[3])) : createArr(10);

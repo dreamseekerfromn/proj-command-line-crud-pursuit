@@ -10,7 +10,7 @@ const _ = require("lodash");
  * @returns {object[]} - new data set w/ an array form.
  */
 function updateData(data, id, str){
-    const props = ['id','name','priceInCents','inStock','description'];
+    const props = ['name','priceInCents','inStock','description'];
     str = str.split("=");
 
     if(!props.some(a => _.has(props, str[0]))){
