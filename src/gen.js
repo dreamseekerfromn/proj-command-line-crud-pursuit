@@ -13,7 +13,7 @@ function createObj(){
     const jsonObj = {
         id: nanoid(5),
         name: faker.commerce.productName(),
-        priceInCents:faker.number.float({min: 1, max: 1000000, precision: 0.01}),
+        priceInCents:faker.number.int({min: 1, max: 100000 }),
         inStock:faker.datatype.boolean(),
         description:faker.commerce.productDescription(),
     }
@@ -41,7 +41,7 @@ function createArr(num){
                                     return a;
                                 }});
     }
-    
+
     return arr;
 }
 
