@@ -35,3 +35,8 @@ function createArr(num){
     }
     return arr;
 }
+
+module.exports = {
+    createArr,
+    
+}
