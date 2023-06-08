@@ -1,25 +1,24 @@
 const { readJSON, writeJSON } = require("./fs");
-const { searchItemById } = require("./search");
+const { searchItemById } = require("./search.js");
 const _ = require("lodash");
 
 function addToCart(data, cart, id){
     let item = searchItemById(cart, id)
-
-    if(!item){
+    if(item){
         return _.map(cart, a => { if(a.id == id){
                                     a.amount++;
                                     return a;
                                 }});
     }
-    item = searchItemById(data, id);
 
-    if (!item){
+    let item2 = _.find(data, a => a.id == id);
+    console.log(item2)
+    if (!item2){
         throw "invalid item id";
     }
     
-
-    item["amount"] = 1;
-    cart.push(item);
+    item2["amount"] = 1;
+    cart.push(item2);
     return cart;
 }
 

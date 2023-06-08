@@ -128,7 +128,7 @@ function run(){
                 console.log(`Error : ${err}`);
                 return -1;
             }
-            console.log("HO")
+            console.log(addItem)
             writeJSON('./data', 'cart.json', addItem);
             break;
         case "remove":
