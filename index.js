@@ -4,6 +4,8 @@ const { deleteByName, deleteById } = require("./src/delete.js");
 const { addToCart, deleteFromCart, emptyCart } = require("./src/cart.js");
 const { searchItemById } = require("./src/search.js");
 const { detailView, detailSingle } = require("./src/detail.js");
+const { create } = require("lodash");
+const { updateData } = require("./src/update.js");
 
 function run(){
     const argc = process.argv.length;
@@ -13,14 +15,9 @@ function run(){
     try{
         data = readJSON('./data', 'data.json');
     } catch(err){
-        if(err === 'ENOENT'){
+        if(err){
             writeJSON(`./data`, 'data.json', []);
             console.log("./data/data.json is missing.");
-            return -1;
-        }
-        else{
-            console.log(`Error: ${err}`);
-            writeJSON(`./data`, 'data.json', []);
             return -1;
         }
     }
@@ -28,24 +25,42 @@ function run(){
     try{
         cart = readJSON("./data", "cart.json");
     } catch(err){
-        if(err == "ENOENT"){
+        if(err ){
             writeJSON("./data", "cart.json", []);
             console.log("cart.json is missing");
-            return -1;
-        }
-        else{
-            console.log(`${err}`);
-            writeJSON("./data", "cart.json", []);
             return -1;
         }
     }
 
     switch(process.argv[2]){
         case "create":
+            switch(argc){
+                /** ToDo: implementing readline */
+                /*case 3:
+                    console.log("Name:");
+                    console.log("priceIncents:");
+                    console.log("inStock:");
+                    console.log("description:");
+                    break;*/
+                case 7:
+                    let createdTemp;
+                    try{
+                        createdTemp = create(data, process.argv[3], process.argv[4], process.argv[5], process.argv[6]);
+                    }
+                    catch(err){
+                        console.log(err);
+                        return -1;
+                    }
+                    break;
+                default:
+                    console.log("worng value");
+                    return -1;
+            }
             break;
         case "delete":
             if(argc == 3 || argc > 5){
-                break;
+                console.log("wrong input");
+                return -1;
             }
             if(argc == 4){
                 let deletedTemp = deleteById(data, process.argv[3]);
@@ -62,11 +77,24 @@ function run(){
                         writeJSON(`./data`, 'data.json', deletedTempById);
                         break;
                     default:
-                        break;
+                        console.log("wrong input");
+                        return -1;
                 }
             }
             break;
         case "update":
+            let updatedTemp;
+            
+            try{
+                updatedTemp = updateData(data, process.argv[3], process.argv[4]);
+            }
+            catch(err){
+                if(err){
+                    console.log(err);
+                    return -1;
+                }
+            }
+            writeJSON('./data', "data.json", updatedTemp);
             break;
         case "detail":
             switch(argc){
@@ -87,7 +115,15 @@ function run(){
             writeJSON(`./data`, 'data.json', temp);
             break;
         case "add":
-            let addItem = addToCart(data, cart, process.argv[3]);
+            let addItem;
+            try{
+                addItem = addToCart(data, cart, process.argv[3]);
+
+            }
+            catch(err){
+                console.log(err);
+                return -1;
+            }
             writeJSON('./data', 'cart.json', addItem);
             break;
         case "remove":
