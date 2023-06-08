@@ -13,8 +13,8 @@ const { duplicateC } = require("./duplChecker");
  * @returns {object[]} - it will be used to write our data.
  */
 function create(data = d, ...inputStream){
-    console.log(inputStream)
-    const prop = ['id','name','priceInCents','inStock','description'];
+    console.log(inputStream.length)
+    const prop = ['name','priceInCents','inStock','description'];
 
     if(inputStream.length != 4){
         return data;

@@ -3,20 +3,20 @@ const { searchItemById } = require("./search");
 const _ = require("lodash");
 
 function addToCart(data, cart, id){
-    let item = searchItemById(cart, id);
-    
-    if(item){
+    let item = searchItemById(cart, id)
+
+    if(!item){
         return _.map(cart, a => { if(a.id == id){
                                     a.amount++;
                                     return a;
                                 }});
     }
-
     item = searchItemById(data, id);
 
     if (!item){
         throw "invalid item id";
     }
+    
 
     item["amount"] = 1;
     cart.push(item);

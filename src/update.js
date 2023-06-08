@@ -13,7 +13,11 @@ function updateData(data, id, str){
     const props = ['name','priceInCents','inStock','description'];
     str = str.split("=");
 
-    if(!props.some(a => _.has(props, str[0]))){
+    if(str.length != 2){
+        throw "Wrong input for property"
+    }
+
+    if(!props.includes(str[0])){
         throw "Wrong property";
     }
 

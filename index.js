@@ -2,9 +2,9 @@ const { createArr } = require("./src/gen.js");
 const { writeJSON, readJSON } = require("./src/fs.js");
 const { deleteByName, deleteById } = require("./src/delete.js");
 const { addToCart, deleteFromCart, emptyCart } = require("./src/cart.js");
-const { searchItemById } = require("./src/search.js");
+const { searchItemById, filterItemById } = require("./src/search.js");
 const { detailView } = require("./src/detail.js");
-const { create } = require("lodash");
+const { create } = require("./src/create.js");
 const { updateData } = require("./src/update.js");
 const { totalCart } = require("./src/total.js");
 
@@ -52,6 +52,7 @@ function run(){
                         console.log(err);
                         return -1;
                     }
+                    writeJSON(`./data`, 'data.json', createdTemp);
                     break;
                 default:
                     console.log("worng value");
@@ -103,7 +104,7 @@ function run(){
                     detailView(data);
                     break;
                 case 4:
-                    detailView(searchItemById(data,process.argv[3]));
+                    detailView(filterItemById(data,process.argv[3]));
                     break;
                 default:
                     console.log("wrong command");
@@ -118,14 +119,16 @@ function run(){
         case "add":
             let addItem;
             try{
+                console.log("HI")
                 addItem = addToCart(data, cart, process.argv[3]);
-
+                console.log("HELLO")
             }
             catch(err){
-                console.log(err);
+                console.log("HEY")
+                console.log(`Error : ${err}`);
                 return -1;
             }
-
+            console.log("HO")
             writeJSON('./data', 'cart.json', addItem);
             break;
         case "remove":
