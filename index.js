@@ -3,9 +3,10 @@ const { writeJSON, readJSON } = require("./src/fs.js");
 const { deleteByName, deleteById } = require("./src/delete.js");
 const { addToCart, deleteFromCart, emptyCart } = require("./src/cart.js");
 const { searchItemById } = require("./src/search.js");
-const { detailView, detailSingle } = require("./src/detail.js");
+const { detailView } = require("./src/detail.js");
 const { create } = require("lodash");
 const { updateData } = require("./src/update.js");
+const { totalCart } = require("./src/total.js");
 
 function run(){
     const argc = process.argv.length;
@@ -102,7 +103,7 @@ function run(){
                     detailView(data);
                     break;
                 case 4:
-                    detailSingle(searchItemById(data,process.argv[3]));
+                    detailView(searchItemById(data,process.argv[3]));
                     break;
                 default:
                     console.log("wrong command");
@@ -124,6 +125,7 @@ function run(){
                 console.log(err);
                 return -1;
             }
+
             writeJSON('./data', 'cart.json', addItem);
             break;
         case "remove":
@@ -132,6 +134,9 @@ function run(){
             break;
         case "empty":
             emptyCart();
+            break;
+        case "total":
+            totalCart(cart);
             break;
         default:
 
