@@ -36,10 +36,19 @@ function create(data = d, ...inputStream){
         if(prop === "priceInCents"){
             newObj[prop] = Number(newObj[prop]);
         }
+        else if(prop === "isStock"){
+            newObj[prop] = Boolean(newObj[prop]);
+        }
     }
 
     if(!prop.every(prop => _.has(newObj,prop))){
-        return data;
+        throw "error: wrong property is detected.";
+    }
+    if(newObj.priceInCents < 0){
+        throw "error: priceInCents cannot be negative";
+    }
+    if(newObj.priceInCents == NaN){
+        throw "error: wrong value is inputted to [priceInCents]"
     }
     
     data.push(newObj);
