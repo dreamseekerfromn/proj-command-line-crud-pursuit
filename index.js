@@ -1,7 +1,7 @@
 const { createArr } = require("./src/gen.js");
 const { writeJSON } = require("./src/fs.js");
-const { deleteByName, DeleteById } = require("./src/delete.js");
-const d = require('../data/data.json');
+const { deleteByName, deleteById } = require("./src/delete.js");
+const d = require('./data/data.json');
 
 function run(){
     const argc = process.argv.length;
