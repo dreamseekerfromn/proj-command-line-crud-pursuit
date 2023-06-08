@@ -1,5 +1,6 @@
 const { readJSON, writeJSON } = require("./fs");
 const { searchItemById } = require("./search");
+const _ = require("lodash");
 
 function addToCart(data, cart, id){
     let item = searchItemById(data, id);
@@ -10,12 +11,12 @@ function addToCart(data, cart, id){
     return cart;
 }
 
-function deleteFromCart(data, cart, id){
+function deleteFromCart(cart, id){
     return _.dropRightWhile(cart, {'id': id});
 }
 
-function emptyCart(data, id){
-    writeJSON("../data","cart.json",[]);
+function emptyCart(){
+    writeJSON("./data","cart.json",[]);
 }
 
 module.exports = {
