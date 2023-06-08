@@ -1,5 +1,6 @@
 const { faker } = require("@faker-js/faker");
 const { nanoid } = require("nanoid");
+const { duplicateC } = require("./duplChecker");
 
 /**
  * createObj()
@@ -33,10 +34,18 @@ function createArr(num){
     for(let index = 0; index < num; index++){
         arr.push(createObj());
     }
+    
+    if(!duplicateC(arr)){
+        arr = _.map(arr, a => { if(data.indexOf(a.id) !== data.lastIndexOf(a.id)){
+                                    a.id = nanoid(5);
+                                    return a;
+                                }});
+    }
+    
     return arr;
 }
 
 module.exports = {
     createArr,
-    
+
 }

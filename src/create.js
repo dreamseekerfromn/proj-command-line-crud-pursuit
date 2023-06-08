@@ -49,16 +49,16 @@ function create(data = d, ...inputStream){
         throw "error: priceInCents cannot be negative";
     }
     if(newObj.priceInCents == NaN){
-        throw "error: wrong value is inputted to [priceInCents]"
+        throw "error: wrong value is inputted to [priceInCents]";
     }
     
     data.push(newObj);
 
     if(!duplicateC(data)){
-        const duplicatedId = _.filter(data, a => data.indexOf(a.id) !== data.lastIndexOf(a.id));
-        for(let single of duplicatedId){
-            single.id = nanoid(5);
-        }
+        data = _.map(data, a => { if(data.indexOf(a.id) !== data.lastIndexOf(a.id)){
+            a.id = nanoid(5);
+            return a;
+        }});
     }
 
     return data;
