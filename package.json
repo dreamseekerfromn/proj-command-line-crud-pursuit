@@ -4,7 +4,17 @@
   "description": "Command Line Inventory Lab Project.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "detail": "node index.js detail",
+    "create": "node index.js create",
+    "update": "node index.js update",
+    "add": "node index.js add",
+    "remove": "node index.js remove",
+    "delete": "node index.js delete",
+    "help": "node index.js help",
+    "faker": "node index.js faker",
+    "ten": "node index.js faker 10",
+    "empty": "node index.js empty"
   },
   "keywords": [],
   "author": "Sung Yi",
