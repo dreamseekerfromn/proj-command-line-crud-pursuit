@@ -10,7 +10,7 @@ const _ = require("lodash");
  * @param {string} name - name to delete
  * @returns {object[]} - new updated array
  */
-function deleteByName(data = d, name){
+function deleteByName(data, name){
     return _.dropRightWhile(data, {'name': name});
 }
 
@@ -23,7 +23,7 @@ function deleteByName(data = d, name){
  * @param {string} id - name to delete
  * @returns {object[]} - new updated array
  */
-function deleteById(data = d, id){
+function deleteById(data, id){
     return _.dropRightWhile(data, {'id': id});
 }
 

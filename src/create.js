@@ -8,7 +8,7 @@ const { duplicateC } = require("./duplChecker");
  * -----------------------------------
  * create new data to the json file
  * 
- * @param {object[]} data - JSON file, 
+ * @param {object[]} data - JSON file, which is our item data.
  * @param  {...string} inputStream - input string with "[property]=[value]" format
  * @returns {object[]} - it will be used to write our data.
  */
