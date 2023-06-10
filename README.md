@@ -1,67 +1,64 @@
 # Command-line Inventory Application Project
 
-Bringing together all you've learned so far, about JavaScript and building applications, build a Command-line Inventory Application. It will be an application where employees can keep track of the inventory of a store. Employees can create new items, update items, see a list of items, see details of one item and delete items. Your application should choose a particular resource or theme and be named appropriately.
+## Introduction
 
-## Project Scoring
+A pursuit 10.2 project to handle inventory with command line. This project has only some of the basic functionalitis that an inventory application has. So no encryption, no web programming stuffs (like php, html, css and some other server-side programming) beside javascript.
 
-This project has two different parts on which you will be graded. Each part is weighted differently.
+## Usage
 
-- 60% of the project is scored on **completion**.
-- 30% of the project is scored through the **mastery rubric**.
-- 10% of the project is scored through **stretch goals**.
+This application needs an option to operate. 
+The command should be ***node index.js [option] (arg1 | ...)***
 
-In total, you must receive at least 70% to complete this project. For example, you could attain 50% of points through the completion requirements and 20% of points through the mastery rubric.
+like...
+```
+  node index.js help
+  node index.js create name=abc inStock=true priceInCents=500 "description=aaa bbb"
+```
 
-## Completion
+## Options
 
-### Set up
+All of the options are case sensitive and low cases only.
+console.log("node index [option] [arg1 | arg2 | ...]");
+  detail : will print whole data.json`);
+  detail [id] : will print [id] and its data only.
+  create [prop1] [prop2] [prop3] [prop4] : will create a new data to [data.json].
+    [prop] must be [name], [inStock], [description], [priceInCents] in any order & case sensitive
+    [prop] must be form [name of property]=[value], without space before & after the equal sign.
+  delete [id] : will delete [id] and its element from [data.json]
+    delete ["name" | "id"] [name | id] : will erase [name] or [id] that provided
+    will erase all the duplicated name\n
+  update [id] [arg] : update [id]'s value. [arg] must be [property]=[value], no space before after equal sign
 
-1. Create a GitHub repository.
-1. Your GitHub repository should have a README.md file with setup instructions and a guide/cheatsheet on how to user your application (what commands are available, show some sample commands).
-1. You have a `.gitignore` that is set up to ignore at least `node_modules` and `.DS_Store` and will ignore additional files, as needed.
-1. You have a sample JSON file with some sample data. It should be an array of at least three objects. Each object should contain the following properties and at least one other property unique to your item:
-  - `name`
-  - `priceInCents`
-  - `inStock`
-1. You have a JSON file where your application will read from and write to.
-1. You have an `index.js` file that is the entry point to your application
-1. You have an updated package.json that has an appropriate `name`, and `description`. It also has your name as the `author` and it has a series of `scripts` that align with the functionality of your application. If your app requires additional packages, they are correctly set up as dependencies in this file as well.
+  faker [number] : will replace whole [data.json] file w/ random generated data
+  add [id] : will add item [id] to [cart.json]
 
-### Features
+  remove [id] : remove whole [id] from [cart.json]
 
-8. A user can create a new item.
-1. A user can see a list of all the items.
-1. A user can see the details of one item.
-1. A user can delete an item.
-1. A user can update an item.
-1. When a user performs an action like creating or deleting an item, the data file is updated correctly. If the JSON is malformed, there is some logic to prevent writing to the file and thus corrupting the data file.
-1. When a user creates an item a unique id is assigned to the new item.
-1. Add a cart function where a user can add items to the shopping cart and see the total price and total number of each item
-1. Add a cancel cart function that empties the shopping cart.
+  empty : will replace [cart.json] to empty file.
 
-### Mastery rubric
+  total : see total amount item in the cart.
 
-This section of the project is designed to measure your increasing skill at writing good code and following best practices.
+## Npm scripts
 
-To view components of the mastery rubric, view the appropriate assignment on Canvas.
+    "test": "jest"
+    "detail": "node index.js detail"
+    "create": "node index.js create"
+    "update": "node index.js update"
+    "add": "node index.js add"
+    "remove": "node index.js remove"
+    "delete": "node index.js delete"
+    "help": "node index.js help"
+    "faker": "node index.js faker"
+    "ten": "node index.js faker 10"
+    "empty": "node index.js empty"
 
-### Stretch goals
 
-This section of the project measures your ability to go above and beyond in creating your project. To score points in this section, you should incorporate a feature, technology, or skill not explicitly required by the project instructions.
+### Modules
 
-When you submit your pull request, _make sure to include a description of any stretch goals you implemented._ You may choose from the list below or come up with features or tasks that are more relevant to your specific implementation of the project.
+I used ___nanoid___ , ___faker-js___ , ___lodash___ , and node-fs.
 
-- Add a new command that lets the user filter by a item property like:
-  - a true/false value (see all cookies that are vegan).
-  - a greater than/less than value (see all shoes that cost more than $100).
-- Add unit testing with Jest.
-- Add the npm library `chalk` to make the use interaction clearer and more exciting.
-- Use readline to create an interactive menu for the user to interact with.
+### More stuffs that I might add
 
-## Project setup and overview
-
-There are no tests for this project and you _should not_ fork and clone this repository. Instead, create your own repository and start a new npm project.
-
-## Example
-
-For example, you can choose to track the inventory of "cookies" at a bakery. In that case, the keys you store for each cookie could be "name", "priceInCents", "inStock", and "isVegan". Alternatively, you could track "shoes" at a shoe store. In addition to the required keys, you might also track `shoeSize`.
+1. Adding `stock field` to data.json
+2. More test cases
+3. Adapting `readline` to accept properties without putting in the command line.
