@@ -8,6 +8,11 @@ const { duplicateC } = require("./duplChecker");
  * generate new data w/ faker
  * 
  * @returns {object} - return new object w/ fake values.
+ *  @property {string} id - random generated id, 5 characters long.
+ *  @property {string} name - name of the item
+ *  @property {number} priceInCents -price of the item
+ *  @property {boolean} inStock - is the item available?
+ *  @property {string} description - item description.
  */
 function createObj(){
     const jsonObj = {

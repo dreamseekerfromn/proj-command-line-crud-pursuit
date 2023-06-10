@@ -13,11 +13,10 @@ const { duplicateC } = require("./duplChecker");
  * @returns {object[]} - it will be used to write our data.
  */
 function create(data = d, ...inputStream){
-    console.log(inputStream.length)
     const prop = ['name','priceInCents','inStock','description'];
 
     if(inputStream.length != 4){
-        return data;
+        throw "not enough properties."
     }
 
     let field1 = inputStream[0].split("=");
@@ -33,6 +32,7 @@ function create(data = d, ...inputStream){
         [field4[0]]:field4[1],
     }
 
+    /** typecast section */
     for(let prop in newObj){
         if(prop === "priceInCents"){
             newObj[prop] = Number(newObj[prop]);
@@ -42,6 +42,7 @@ function create(data = d, ...inputStream){
         }
     }
 
+    /** validation */
     if(!prop.every(prop => _.has(newObj,prop))){
         throw "error: wrong property is detected.";
     }
@@ -54,6 +55,7 @@ function create(data = d, ...inputStream){
     
     data.push(newObj);
 
+    /** duplicated id chk */
     if(!duplicateC(data)){
         data = _.map(data, a => { if(data.indexOf(a.id) !== data.lastIndexOf(a.id)){
             a.id = nanoid(5);
