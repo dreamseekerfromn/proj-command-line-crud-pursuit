@@ -14,7 +14,8 @@
     "help": "node index.js help",
     "faker": "node index.js faker",
     "ten": "node index.js faker 10",
-    "empty": "node index.js empty"
+    "empty": "node index.js empty",
+    "total": "node index.js total"
   },
   "keywords": [],
   "author": "Sung Yi",
